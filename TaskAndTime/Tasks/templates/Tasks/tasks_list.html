@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block content %}
+<div class="tasks-header">
+    <h1 class="tasks-header__title">Задачи сотрудника {{ employee.first_name }} {{ employee.last_name }}</h1>
+</div>
+<div class="tasks-list">
+    {% for task in tasks %}
+    <div class="task-card">
+        <h3 class="task-card__title">{{ task.category.name }}</h3>
+        <p class="task-card__time">Затрачено: {{ task.spent }} часов</p>
+        <p class="task-card__comment">{{ task.comment }}</p>
+        {% if task.report %}
+        <a href="{{ task.report.url }}" class="task-card__file" download>📄 Скачать отчёт</a>
+        {% else %}
+        <a href="#" class="task-card__file no-click">Без отчёта</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

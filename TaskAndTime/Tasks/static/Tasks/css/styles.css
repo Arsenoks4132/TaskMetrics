@@ -37,10 +37,15 @@
     margin: 2em auto;
     padding: 2em;
     width: 80%;
-    max-width: 900px;
+    max-width: 1200px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+
+    word-break: break-all;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .main--centered {
@@ -408,4 +413,84 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.tasks-header {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.tasks-header__title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.tasks-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    justify-content: flex-start;
+    max-width: 100%; /* Используем всю доступную ширину */
+    margin: 0 auto;
+    padding: 0 1em; /* Небольшие отступы по бокам */
+}
+
+.task-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.task-card__title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.task-card__time {
+    font-size: 1em;
+    color: #555;
+    margin: 0;
+}
+
+.task-card__comment {
+    font-size: 0.9em;
+    color: #666;
+    margin: 0;
+}
+
+.task-card {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 240px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8em;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative; /* Для размещения дочерних элементов относительно карточки */
+    min-height: 200px; /* Минимальная высота карточки */
+}
+
+.task-card__file {
+    font-size: 1em;
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    transition: color 0.3s;
+}
+
+.task-card__file:hover {
+    color: #0056b3;
+}
+
+.no-click {
+  pointer-events: none;
+  cursor: default;
 }

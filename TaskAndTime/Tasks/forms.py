@@ -48,6 +48,7 @@ class RegisterUserForm(UserCreationForm):
             'email': forms.TextInput(attrs={'class': 'form__input'}),
             'first_name': forms.TextInput(attrs={'class': 'form__input'}),
             'last_name': forms.TextInput(attrs={'class': 'form__input'}),
+            'photo': forms.FileInput(attrs={'class': 'form__file'}),
         }
 
     def clean_email(self):

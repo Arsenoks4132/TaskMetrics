@@ -48,7 +48,7 @@ class Task(models.Model):
         verbose_name='Комментарий'
     )
     report = models.FileField(
-        upload_to='reports/%Y/%m/%d',
+        upload_to='reports/%Y/%m/%d/',
         blank=True,
         null=True,
         default=None,

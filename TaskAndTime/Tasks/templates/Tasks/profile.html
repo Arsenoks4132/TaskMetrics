@@ -6,7 +6,7 @@
     <div class="profile">
         <div class="profile__person">
             {% if user.photo %}
-            <img class="profile__photo" src="{{ user.photo }}" alt="Профиль пользователя">
+            <img class="profile__photo" src="{{ user.photo.url }}" alt="Профиль пользователя">
             {% else %}
             <img class="profile__photo" src="{{ default_image }}" alt="Профиль пользователя">
             {% endif %}

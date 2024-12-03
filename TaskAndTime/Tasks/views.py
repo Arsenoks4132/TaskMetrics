@@ -1,10 +1,10 @@
 from django.db.models import Sum, F, Count
+from django.shortcuts import get_list_or_404
 from django.views.generic import TemplateView, CreateView, DetailView, ListView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404
 
 from .forms import LoginUserForm, RegisterUserForm, AddTaskForm
 from .models import Task
@@ -94,16 +94,45 @@ class ProfileUser(LoginRequiredMixin, CreateView, DetailView):
         return super().form_valid(form)
 
 
-class Statistics(ListView):
+class Statistics(PermissionRequiredMixin, ListView):
     template_name = 'Tasks/statistics.html'
     context_object_name = 'employees'
+    permission_required = ('view_user',)
 
     extra_context = {
         'title': 'Статистика',
     }
 
     def get_queryset(self):
-        tasks = Task.objects.annotate(total=F('spent') * F('category__cost')).values('worker').annotate(
-            sum=Sum('total'), count=Count('worker'), hours=Sum('spent'), name=F('worker__first_name'),
-            surname=F('worker__last_name'), email=F('worker__email'))
+        tasks = (
+            Task.objects.annotate(total=F('spent') * F('category__cost')).values('worker').
+            annotate(
+                sum=Sum('total'),
+                count=Count('worker'),
+                hours=Sum('spent'),
+                name=F('worker__first_name'),
+                surname=F('worker__last_name'),
+                email=F('worker__email')
+            ))
+        return tasks
+
+
+class TasksList(PermissionRequiredMixin, ListView):
+    template_name = 'Tasks/tasks_list.html'
+    pk_user_kwarg = 'employee_id'
+    context_object_name = 'tasks'
+    permission_required = ('view_user',)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data()
+        employee = context[self.context_object_name][0].worker
+        context = {
+            **context,
+            'title': f'Задачи {employee.username}',
+            'employee': employee
+        }
+        return context
+
+    def get_queryset(self):
+        tasks = get_list_or_404(Task, worker__pk=self.kwargs[self.pk_user_kwarg])
         return tasks
