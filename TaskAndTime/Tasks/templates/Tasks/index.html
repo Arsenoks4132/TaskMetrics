@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>ТЕСТ</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="main main--centered">
+    <p class="main__description">
+        TaskAndTimes — это удобный инструмент для учета рабочего времени и управления задачами сотрудников.
+        Этот сайт поможет вам повысить эффективность работы, управлять задачами и отслеживать время сотрудников.
+    </p>
+    <p class="main__highlight">
+        Выберите подходящий вход:
+    </p>
+    <div class="main__links">
+        <a class="main__link" href="#employees">Для сотрудников</a>
+        <a class="main__link" href="#managers">Для руководителей</a>
+    </div>
+</main>
+{% endblock %}
