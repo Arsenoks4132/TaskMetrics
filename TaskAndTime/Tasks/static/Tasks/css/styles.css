@@ -158,3 +158,254 @@
     text-decoration: none;
     color: #359535;
 }
+
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.profile__person {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    padding: 1.5em;
+}
+
+.profile {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    padding: 1.5em;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile__photo {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+}
+
+.profile__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile__details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile__name {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.profile__email {
+    font-size: 1em;
+    color: #555;
+}
+
+.profile__stats {
+    font-size: 1.6em;
+    color: #555;
+}
+
+.profile__tasks,
+.profile__hours {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.form__select {
+    width: 100%;
+    padding: 0.8em;
+    font-size: 1em;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    appearance: none; /* Убирает стандартный стиль стрелки в браузерах */
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 6" fill="none" stroke="gray"><path d="M1 1l4 4 4-4"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 0.8em center;
+    background-size: 1em;
+    cursor: pointer;
+}
+
+.form__select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.form__select:hover {
+    border-color: #888;
+}
+
+.form__file {
+    font-size: 1em;
+    padding: 0.6em 0.8em;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.form__file:hover {
+    border-color: #888;
+}
+
+.form__file:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.form__file::-webkit-file-upload-button {
+    font-size: 1em;
+    padding: 0.6em 1.2em;
+    color: white;
+    background-color: #6CCF70;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form__file::-webkit-file-upload-button:hover {
+    background-color: #45a049;
+}
+
+.form__file::-webkit-file-upload-button:focus {
+    outline: none;
+    background-color: #3e8e41;
+}
+
+.logout-button {
+    font-size: 0.9em;
+    padding: 0.5em 1em;
+    color: white;
+    background-color: #f44336; /* Красный цвет */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: None;
+}
+
+.logout-button:hover {
+    background-color: #d32f2f; /* Более тёмный красный */
+    transform: scale(1.05); /* Легкое увеличение кнопки */
+}
+
+.logout-button:focus {
+    outline: none;
+    background-color: #c62828;
+}
+
+.logout-button:active {
+    background-color: #b71c1c;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    transform: scale(1);
+}
+
+.employees-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.employee-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.employee-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.employee-card__column {
+    flex: 1;
+    text-align: center;
+    padding: 0 1em;
+}
+
+.employee-card__info {
+    text-align: left;
+    padding-left: 0;
+}
+
+.employee-card__name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.employee-card__email {
+    font-size: 0.9em;
+    color: #555;
+    margin: 0;
+}
+
+.employee-card__tasks,
+.employee-card__hours,
+.employee-card__earnings {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #4CAF50;
+    margin: 0.2em 0 0;
+}
+
+.employee-card__column p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.main-header__title {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.main-header__description {
+    font-size: 1.1em;
+    color: #555;
+    margin: 0.5em 0 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,8 +1,14 @@
-from django.views.generic import TemplateView, CreateView
+from django.db.models import Count, Sum
+from django.views.generic import TemplateView, CreateView, DetailView
 from django.contrib.auth.views import LoginView
+from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
 
-from .forms import LoginUserForm, RegisterUserForm
+from .forms import LoginUserForm, RegisterUserForm, AddTaskForm
+from .models import Task
+from TaskAndTime import settings
 
 
 # Create your views here.
@@ -26,6 +32,9 @@ class LoginEmployee(LoginUser):
         'button_text': 'Войти'
     }
 
+    def get_success_url(self):
+        return reverse_lazy('profile')
+
 
 class LoginSupervisor(LoginUser):
     extra_context = {
@@ -46,3 +55,38 @@ class RegisterUser(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('login_employee')
+
+
+class ProfileUser(LoginRequiredMixin, CreateView, DetailView):
+    model = get_user_model()
+    form_class = AddTaskForm
+    template_name = 'Tasks/profile.html'
+
+    extra_context = {
+        'title': 'Профиль',
+        'default_image': settings.DEFAULT_PROFILE_IMAGE,
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tasks = Task.objects.filter(worker=self.request.user)
+        hours = 0
+        if tasks:
+            hours = tasks.aggregate(Sum('spent'))['spent__sum']
+        context = {
+            **context,
+            'tasks_count': len(tasks),
+            'hours_count': hours
+        }
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def form_valid(self, form):
+        t = form.save(commit=False)
+        t.worker = self.request.user
+        return super().form_valid(form)

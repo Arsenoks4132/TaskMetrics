@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 
 # Create your models here.
 class User(AbstractUser):
+    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True, null=True, verbose_name='Фотография')
     pass
 
 
@@ -17,6 +18,9 @@ class Category(models.Model):
     cost = models.IntegerField(
         verbose_name='Стоимость'
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Task(models.Model):
