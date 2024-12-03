@@ -28,7 +28,9 @@ class Task(models.Model):
     category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
-        related_name='tasks'
+        related_name='tasks',
+        null=True,
+        blank=False
     )
     spent = models.IntegerField(
         verbose_name='Время'

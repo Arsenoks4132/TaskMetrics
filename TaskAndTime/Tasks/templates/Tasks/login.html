@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load Tasks_tags %}
+
+{% block content %}
+<main class="main main--centered">
+    <h2 class="form__title">Вход на сайт в качестве {{ login_type }}</h2>
+    {% post_form form button_text %}
+</main>
+
+{% endblock %}

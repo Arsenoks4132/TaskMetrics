@@ -7,11 +7,11 @@
         Этот сайт поможет вам повысить эффективность работы, управлять задачами и отслеживать время сотрудников.
     </p>
     <p class="main__highlight">
-        Выберите подходящий вход:
+        Выберите подходящий вход или <a class="link" href="{% url 'registration' %}">Зарегистрируйтесь</a>:
     </p>
     <div class="main__links">
-        <a class="main__link" href="#employees">Для сотрудников</a>
-        <a class="main__link" href="#managers">Для руководителей</a>
+        <a class="main__link" href="{% url 'login_employee' %}">Для сотрудников</a>
+        <a class="main__link" href="{% url 'login_supervisor' %}">Для руководителей</a>
     </div>
 </main>
 {% endblock %}
