@@ -8,43 +8,25 @@
         сотрудников.</p>
 </div>
 <div class="employees-list">
+    {% for employee in employees %}
     <div class="employee-card">
         <div class="employee-card__column employee-card__info">
-            <h3 class="employee-card__name">Иван Иванов</h3>
-            <p class="employee-card__email">ivan.ivanov@example.com</p>
+            <h3 class="employee-card__name">{{ employee.name }} {{ employee.surname }}</h3>
+            <p class="employee-card__email">{{ employee.email }}</p>
         </div>
         <div class="employee-card__column">
             <p>Задач выполнено:</p>
-            <p class="employee-card__tasks">15</p>
+            <p class="employee-card__tasks">{{ employee.count }}</p>
         </div>
         <div class="employee-card__column">
             <p>Отработано часов:</p>
-            <p class="employee-card__hours">120</p>
+            <p class="employee-card__hours">{{ employee.hours }}</p>
         </div>
         <div class="employee-card__column">
             <p>Заработано:</p>
-            <p class="employee-card__earnings">45,000 руб.</p>
+            <p class="employee-card__earnings">{{ employee.sum }} руб.</p>
         </div>
     </div>
-    <div class="employee-card">
-        <div class="employee-card__column employee-card__info">
-            <h3 class="employee-card__name">Анна Смирнова</h3>
-            <p class="employee-card__email">anna.smirnova@example.com</p>
-        </div>
-        <div class="employee-card__column">
-            <p>Задач выполнено:</p>
-            <p class="employee-card__tasks">22</p>
-        </div>
-        <div class="employee-card__column">
-            <p>Отработано часов:</p>
-            <p class="employee-card__hours">140</p>
-        </div>
-        <div class="employee-card__column">
-            <p>Заработано:</p>
-            <p class="employee-card__earnings">56,000 руб.</p>
-        </div>
-    </div>
-
-    <!-- Добавьте больше карточек сотрудников здесь -->
+    {% endfor %}
 </div>
 {% endblock %}

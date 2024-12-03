@@ -1,5 +1,5 @@
-from django.db.models import Count, Sum
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.db.models import Sum, F, Count
+from django.views.generic import TemplateView, CreateView, DetailView, ListView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -42,7 +42,9 @@ class LoginSupervisor(LoginUser):
         'login_type': 'Руководителя',
         'button_text': 'Войти'
     }
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        return reverse_lazy('statistics')
 
 
 class RegisterUser(CreateView):
@@ -72,10 +74,10 @@ class ProfileUser(LoginRequiredMixin, CreateView, DetailView):
         tasks = Task.objects.filter(worker=self.request.user)
         hours = 0
         if tasks:
-            hours = tasks.aggregate(Sum('spent'))['spent__sum']
+            hours = tasks.aggregate(total=Sum('spent'))['total']
         context = {
             **context,
-            'tasks_count': len(tasks),
+            'tasks_count': tasks.count(),
             'hours_count': hours
         }
         return context
@@ -90,3 +92,18 @@ class ProfileUser(LoginRequiredMixin, CreateView, DetailView):
         t = form.save(commit=False)
         t.worker = self.request.user
         return super().form_valid(form)
+
+
+class Statistics(ListView):
+    template_name = 'Tasks/statistics.html'
+    context_object_name = 'employees'
+
+    extra_context = {
+        'title': 'Статистика',
+    }
+
+    def get_queryset(self):
+        tasks = Task.objects.annotate(total=F('spent') * F('category__cost')).values('worker').annotate(
+            sum=Sum('total'), count=Count('worker'), hours=Sum('spent'), name=F('worker__first_name'),
+            surname=F('worker__last_name'), email=F('worker__email'))
+        return tasks
