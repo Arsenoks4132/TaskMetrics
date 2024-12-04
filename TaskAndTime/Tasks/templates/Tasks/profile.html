@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load Tasks_tags %}
+
+{% block content %}
+<div class="profile-container">
+    <div class="profile">
+        <div class="profile__person">
+            {% if user.photo %}
+            <img class="profile__photo" src="{{ user.photo.url }}" alt="Профиль пользователя">
+            {% else %}
+            <img class="profile__photo" src="{{ default_image }}" alt="Профиль пользователя">
+            {% endif %}
+            <div class="profile__details">
+                <div class="profile__info">
+                    <h2 class="profile__name">{{ user.first_name }} {{ user.last_name }}</h2>
+                    <p class="profile__email">{{ user.email }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="profile__stats">
+            <p>Задач выполнено: <span class="profile__tasks">{{ tasks_count }}</span></p>
+            <p>Отработанные часы: <span class="profile__hours">{{ hours_count }}</span></p>
+        </div>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Выйти</button>
+        </form>
+
+    </div>
+    {% post_form form button_text %}
+</div>
+
+{% endblock %}

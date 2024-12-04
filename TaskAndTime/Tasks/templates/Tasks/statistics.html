@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main-header">
+    <h1 class="main-header__title">Список сотрудников</h1>
+    <p class="main-header__description">Просмотрите подробную информацию о задачах, часах и заработке ваших
+        сотрудников.</p>
+</div>
+<div class="employees-list">
+    {% for employee in employees %}
+    <a href="{% url 'tasks_list' employee_id=employee.worker %}" style="text-decoration: None;">
+        <div class="employee-card">
+            <div class="employee-card__column employee-card__info">
+                <h3 class="employee-card__name">{{ employee.name }} {{ employee.surname }}</h3>
+                <p class="employee-card__email">{{ employee.email }}</p>
+            </div>
+            <div class="employee-card__column">
+                <p>Задач выполнено:</p>
+                <p class="employee-card__tasks">{{ employee.count }}</p>
+            </div>
+            <div class="employee-card__column">
+                <p>Отработано часов:</p>
+                <p class="employee-card__hours">{{ employee.hours }}</p>
+            </div>
+            <div class="employee-card__column">
+                <p>Заработано:</p>
+                <p class="employee-card__earnings">{{ employee.sum }} руб.</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

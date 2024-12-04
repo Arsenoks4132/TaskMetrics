@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="not-found">
+    {% block error_text %}
+    <h1 class="not-found__title">404 - Страница не найдена</h1>
+    <p class="not-found__description">
+        К сожалению, запрашиваемая страница отсутствует. Проверьте адрес или вернитесь на главную.
+    </p>
+    {% endblock %}
+    <a href="{% url 'home' %}" class="not-found__link">Вернуться на главную</a>
+</div>
+{% endblock %}
