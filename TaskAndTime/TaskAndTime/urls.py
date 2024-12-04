@@ -20,6 +20,8 @@ from TaskAndTime import settings
 from django.contrib import admin
 from django.urls import path, include
 
+from Tasks import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -28,3 +30,6 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = views.PageNotFound.as_view()
+handler403 = views.PageForbidden.as_view()

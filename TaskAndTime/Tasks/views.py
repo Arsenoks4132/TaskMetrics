@@ -17,6 +17,16 @@ class HomePage(TemplateView):
     extra_context = {'title': 'Домашняя страница'}
 
 
+class PageNotFound(TemplateView):
+    template_name = 'Tasks/page404.html'
+    extra_context = {'title': 'Страница не найдена'}
+
+
+class PageForbidden(TemplateView):
+    template_name = 'Tasks/page403.html'
+    extra_context = {'title': 'Доступ запрещен'}
+
+
 class LoginUser(LoginView):
     form_class = LoginUserForm
     template_name = 'Tasks/login.html'

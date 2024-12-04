@@ -13,3 +13,5 @@ urlpatterns = [
     path('statistics', views.Statistics.as_view(), name='statistics'),
     path('tasks/<int:employee_id>', views.TasksList.as_view(), name='tasks_list')
 ]
+
+
