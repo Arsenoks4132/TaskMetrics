@@ -1,0 +1,31 @@
+volumes:
+  TaskAndTimes_db-data:
+
+services:
+  django:
+    restart: always
+    image: TaskMetrics/django
+    build:
+      context: .
+      dockerfile: docker/django/Dockerfile
+    volumes:
+      - TaskAndTime:/usr/src/app/TaskAndTime
+    working_dir: /usr/src/app/TaskAndTime
+
+    depends_on:
+      postgresql_db:
+        condition: service_healthy
+
+  postgres_db:
+    restart: always
+    image: postgres:17
+    volumes:
+      - TaskAndTimes_db-data:/var/lib/postgresql/data/
+    env_file:
+      - env/.env.db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
