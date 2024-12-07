@@ -2,30 +2,54 @@ volumes:
   TaskAndTimes_db-data:
 
 services:
-  django:
-    restart: always
+  django_backend:
     image: TaskMetrics/django
+
+    restart: always
     build:
       context: .
       dockerfile: docker/django/Dockerfile
+
     volumes:
       - TaskAndTime:/usr/src/app/TaskAndTime
+
     working_dir: /usr/src/app/TaskAndTime
 
     depends_on:
       postgresql_db:
         condition: service_healthy
 
+    command: ['gunicorn', 'TaskAndTime.wsgi']
+
   postgres_db:
-    restart: always
     image: postgres:17
-    volumes:
-      - TaskAndTimes_db-data:/var/lib/postgresql/data/
+
+    restart: always
     env_file:
-      - env/.env.db
+      - .env.db
+
+    volumes:
+      - TaskAndTimes_db-data:/var/lib/postgresql/data
+
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB}" ]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 10s
+
+
+  nginx_frontend:
+    image: nginx:1.27
+    restart: always
+
+    ports:
+      - 80:8080
+    volumes:
+      - TaskAndTime/static:/srv/www/TaskAndTime/static
+      - TaskAndTime/media:/srv/www/TaskAndTime/media
+      - TaskAndTime/logs:/srv/www/TaskAndTime/logs
+      - docker/nginx:/etc/nginx/conf.d
+
+    depends_on:
+      - django_backend
