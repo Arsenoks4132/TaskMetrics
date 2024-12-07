@@ -16,7 +16,7 @@ services:
     working_dir: /usr/src/app/TaskAndTime
 
     depends_on:
-      postgresql_db:
+      postgres_db:
         condition: service_healthy
 
     command: ['gunicorn', 'TaskAndTime.wsgi']
