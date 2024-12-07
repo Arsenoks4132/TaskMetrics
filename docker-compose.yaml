@@ -11,7 +11,7 @@ services:
       dockerfile: docker/django/Dockerfile
 
     volumes:
-      - TaskAndTime:/usr/src/app/TaskAndTime
+      - ./TaskAndTime:/usr/src/app/TaskAndTime
 
     working_dir: /usr/src/app/TaskAndTime
 
@@ -29,7 +29,7 @@ services:
       - .env.db
 
     volumes:
-      - TaskAndTimes_db-data:/var/lib/postgresql/data
+      - ./TaskAndTimes_db-data:/var/lib/postgresql/data
 
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB}" ]
@@ -46,10 +46,10 @@ services:
     ports:
       - 80:8080
     volumes:
-      - TaskAndTime/static:/srv/www/TaskAndTime/static
-      - TaskAndTime/media:/srv/www/TaskAndTime/media
-      - TaskAndTime/logs:/srv/www/TaskAndTime/logs
-      - docker/nginx:/etc/nginx/conf.d
+      - ./TaskAndTime/static:/srv/www/TaskAndTime/static
+      - ./TaskAndTime/media:/srv/www/TaskAndTime/media
+      - ./TaskAndTime/logs:/srv/www/TaskAndTime/logs
+      - ./docker/nginx:/etc/nginx/conf.d
 
     depends_on:
       - django_backend
