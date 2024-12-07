@@ -2,5 +2,4 @@
 /.idea
 /TaskAndTime/media
 /env
-.env.db
-.env.django
+.env
