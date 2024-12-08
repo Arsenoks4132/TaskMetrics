@@ -21,6 +21,8 @@ services:
     depends_on:
       postgres_db:
         condition: service_healthy
+      redis_cache:
+        condition: service_started
 
     command: [ 'gunicorn', '-b 0.0.0.0:8000', 'TaskAndTime.wsgi' ]
 
@@ -73,3 +75,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./docker/traefik/traefik.yml:/etc/traefik/traefik.yml
       - ./docker/traefik/dynamic.yml:/etc/traefik/dynamic.yml
+
+    depends_on:
+      - django_backend
+      - nginx_frontend
+
+  redis_cache:
+    image: redis:stable
+    restart: always
