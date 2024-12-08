@@ -81,5 +81,5 @@ services:
       - nginx_frontend
 
   redis_cache:
-    image: redis:stable
+    image: redis:latest
     restart: always
