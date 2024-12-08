@@ -19,7 +19,7 @@ services:
       postgres_db:
         condition: service_healthy
 
-    command: ['gunicorn', 'TaskAndTime.wsgi']
+    command: ['gunicorn', '-b 0.0.0.0:8000', 'TaskAndTime.wsgi']
 
   postgres_db:
     image: postgres:17
