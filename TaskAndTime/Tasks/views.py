@@ -144,5 +144,8 @@ class TasksList(PermissionRequiredMixin, ListView):
         return context
 
     def get_queryset(self):
-        tasks = get_list_or_404(Task, worker__pk=self.kwargs[self.pk_user_kwarg])
+        tasks = get_list_or_404(
+            Task.objects.order_by('time_create'),
+            worker__pk=self.kwargs[self.pk_user_kwarg]
+        )
         return tasks
