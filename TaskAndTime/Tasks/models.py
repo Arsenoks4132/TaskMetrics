@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 # Create your models here.
@@ -37,13 +38,18 @@ class Task(models.Model):
         blank=False
     )
     spent = models.IntegerField(
-        verbose_name='Время'
+        verbose_name='Время',
+        validators=[
+            MinValueValidator(1),
+            MaxValueValidator(24)
+        ]
     )
     time_create = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Время завершения'
     )
     comment = models.CharField(
+        max_length=1000,
         blank=True,
         verbose_name='Комментарий'
     )

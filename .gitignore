@@ -1,3 +1,6 @@
 /.venv
 /.idea
 /TaskAndTime/media
+/env
+.env
+/TaskAndTimes_db-data

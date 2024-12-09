@@ -1,0 +1,85 @@
+volumes:
+  TaskAndTimes_db-data:
+
+services:
+  django_backend:
+    image: TaskMetrics/django:1
+
+    restart: always
+    deploy:
+      replicas: 3
+
+    build:
+      context: .
+      dockerfile: docker/django/Dockerfile
+
+    volumes:
+      - ./TaskAndTime:/usr/src/app/TaskAndTime
+
+    working_dir: /usr/src/app/TaskAndTime
+
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+      redis_cache:
+        condition: service_started
+
+    command: [ 'gunicorn', '-b 0.0.0.0:8000', 'TaskAndTime.wsgi' ]
+
+  postgres_db:
+    image: postgres:17
+
+    restart: always
+    env_file:
+      - .env
+
+    volumes:
+      - ./TaskAndTimes_db-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+
+  nginx_frontend:
+    image: nginx:1.27
+
+    restart: always
+    deploy:
+      replicas: 3
+
+    volumes:
+      - ./TaskAndTime/static:/srv/www/TaskAndTime/static
+      - ./TaskAndTime/media:/srv/www/TaskAndTime/media
+      - ./TaskAndTime/logs:/srv/www/TaskAndTime/logs
+      - ./docker/nginx:/etc/nginx/conf.d
+
+    depends_on:
+      - django_backend
+
+  traefik_balancer:
+    image: traefik:v3.2
+
+    ports:
+      - 80:80
+      - 8080:8080
+
+    command:
+      - "--configFile=/etc/traefik/traefik.yml"
+      - "--providers.file.filename=/etc/traefik/dynamic.yml"
+
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./docker/traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./docker/traefik/dynamic.yml:/etc/traefik/dynamic.yml
+
+    depends_on:
+      - django_backend
+      - nginx_frontend
+
+  redis_cache:
+    image: redis:latest
+    restart: always

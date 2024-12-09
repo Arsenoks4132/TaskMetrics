@@ -45,7 +45,7 @@ class RegisterUserForm(UserCreationForm):
             'photo': 'Фотография',
         }
         widgets = {
-            'email': forms.TextInput(attrs={'class': 'form__input'}),
+            'email': forms.EmailInput(attrs={'class': 'form__input'}),
             'first_name': forms.TextInput(attrs={'class': 'form__input'}),
             'last_name': forms.TextInput(attrs={'class': 'form__input'}),
             'photo': forms.FileInput(attrs={'class': 'form__file'}),
@@ -70,7 +70,7 @@ class AddTaskForm(forms.ModelForm):
         model = Task
         fields = ['category', 'spent', 'comment', 'report']
         widgets = {
-            'spent': forms.NumberInput(attrs={'class': 'form__input', 'min': 1}),
+            'spent': forms.NumberInput(attrs={'class': 'form__input', 'min': 1, 'max': 24}),
             'comment': forms.Textarea(attrs={'class': 'form__input'}),
             'report': forms.FileInput(attrs={'class': 'form__file'}),
         }
