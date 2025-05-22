@@ -2,9 +2,6 @@
 
 set -e
 
-# === Настройки через переменные окружения ===
-FIXTURE_FILE="${FIXTURE_FILE:-your_fixture_file.json}"
-
 echo "📦 Билдим и запускаем docker-compose..."
 docker compose up -d --build
 
@@ -17,7 +14,7 @@ done
 echo "🔁 Применяем миграции..."
 docker compose exec django_backend python manage.py migrate
 
-# echo "💾 Загружаем фикстуры..."
-# docker compose exec django_backend python manage.py loaddata "$FIXTURE_FILE"
+echo "💾 Загружаем фикстуры..."
+docker compose exec django_backend python manage.py loaddata initial_fixture.json
 
 echo "✅ Всё готово!"
