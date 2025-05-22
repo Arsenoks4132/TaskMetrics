@@ -4,3 +4,4 @@
 /env
 .env
 /TaskAndTimes_db-data
+**/__pycache__/
