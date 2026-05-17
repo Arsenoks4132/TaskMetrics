@@ -599,6 +599,15 @@
     background-color: #f9f9f9;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    gap: 1em;
+}
+
+.category-card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
 }
 
 .category-card__name {
@@ -606,17 +615,27 @@
     font-weight: bold;
     color: #333;
     margin: 0 0 0.2em;
+    word-break: break-word;
 }
 
 .category-card__cost {
     font-size: 0.95em;
     color: #4CAF50;
     margin: 0;
+    white-space: nowrap;
 }
 
 .category-card__actions {
     display: flex;
+    flex-direction: row;
     gap: 0.5em;
+    flex-shrink: 0;
+}
+
+.category-card__actions .task-card__btn {
+    flex: none;
+    white-space: nowrap;
+    padding: 0.4em 1em;
 }
 
 .categories-empty {
