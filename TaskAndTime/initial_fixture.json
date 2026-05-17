@@ -4,15 +4,91 @@
     "pk": 2,
     "fields": {
       "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
-      "last_login": "2025-05-22T22:51:24.980Z",
+      "last_login": "2026-05-13T10:15:00Z",
       "is_superuser": true,
       "username": "admin",
-      "first_name": "",
-      "last_name": "",
+      "first_name": "Арсений",
+      "last_name": "Данов",
       "email": "admin@admin.admin",
       "is_staff": true,
       "is_active": true,
-      "date_joined": "2025-05-22T22:33:52.663Z",
+      "date_joined": "2026-05-01T09:00:00Z",
+      "photo": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Tasks.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
+      "last_login": "2026-05-12T08:40:00Z",
+      "is_superuser": false,
+      "username": "manager_demo",
+      "first_name": "Ирина",
+      "last_name": "Соколова",
+      "email": "manager@example.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-05-02T08:30:00Z",
+      "photo": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Tasks.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
+      "last_login": "2026-05-12T18:10:00Z",
+      "is_superuser": false,
+      "username": "employee_ivan",
+      "first_name": "Иван",
+      "last_name": "Петров",
+      "email": "ivan.petrov@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-03T09:15:00Z",
+      "photo": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Tasks.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
+      "last_login": "2026-05-11T16:25:00Z",
+      "is_superuser": false,
+      "username": "employee_maria",
+      "first_name": "Мария",
+      "last_name": "Орлова",
+      "email": "maria.orlova@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-03T09:45:00Z",
+      "photo": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Tasks.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
+      "last_login": "2026-05-10T14:05:00Z",
+      "is_superuser": false,
+      "username": "employee_egor",
+      "first_name": "Егор",
+      "last_name": "Смирнов",
+      "email": "egor.smirnov@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-05-04T10:20:00Z",
       "photo": "",
       "groups": [],
       "user_permissions": []
@@ -64,6 +140,114 @@
     "fields": {
       "name": "Аналитика и отчётность",
       "cost": 900
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 1,
+    "fields": {
+      "worker": 4,
+      "category": 2,
+      "spent": 3,
+      "time_create": "2026-05-05T09:00:00Z",
+      "comment": "Подготовлен еженедельный отчет по задачам команды.",
+      "report": null
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 2,
+    "fields": {
+      "worker": 4,
+      "category": 3,
+      "spent": 5,
+      "time_create": "2026-05-06T11:30:00Z",
+      "comment": "Выполнена доработка интерфейса формы авторизации.",
+      "report": null
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 3,
+    "fields": {
+      "worker": 4,
+      "category": 6,
+      "spent": 2,
+      "time_create": "2026-05-07T15:10:00Z",
+      "comment": "Собрана аналитика по трудозатратам за неделю.",
+      "report": null
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 4,
+    "fields": {
+      "worker": 5,
+      "category": 1,
+      "spent": 4,
+      "time_create": "2026-05-05T10:20:00Z",
+      "comment": "Выполнены внештатные задачи по обработке заявок.",
+      "report": null
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 5,
+    "fields": {
+      "worker": 5,
+      "category": 4,
+      "spent": 3,
+      "time_create": "2026-05-08T13:40:00Z",
+      "comment": "Актуализирована рабочая документация по проекту.",
+      "report": null
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 6,
+    "fields": {
+      "worker": 5,
+      "category": 5,
+      "spent": 2,
+      "time_create": "2026-05-09T16:00:00Z",
+      "comment": "Проверены и прокомментированы задания младших сотрудников.",
+      "report": null
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 7,
+    "fields": {
+      "worker": 6,
+      "category": 3,
+      "spent": 6,
+      "time_create": "2026-05-06T09:50:00Z",
+      "comment": "Разработан пользовательский интерфейс страницы статистики.",
+      "report": null
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 8,
+    "fields": {
+      "worker": 6,
+      "category": 2,
+      "spent": 2,
+      "time_create": "2026-05-07T12:15:00Z",
+      "comment": "Сформирован отчет по завершенным задачам спринта.",
+      "report": null
+    }
+  },
+  {
+    "model": "Tasks.task",
+    "pk": 9,
+    "fields": {
+      "worker": 6,
+      "category": 4,
+      "spent": 3,
+      "time_create": "2026-05-10T14:30:00Z",
+      "comment": "Подготовлена документация по настройке серверной части.",
+      "report": null
     }
   }
 ]

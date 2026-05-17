@@ -24,7 +24,7 @@ services:
       redis_cache:
         condition: service_started
 
-    command: [ 'gunicorn', '-b 0.0.0.0:8000', 'TaskAndTime.wsgi' ]
+    command: [ '/usr/src/app/entrypoint.sh' ]
 
   postgres_db:
     image: postgres:17
