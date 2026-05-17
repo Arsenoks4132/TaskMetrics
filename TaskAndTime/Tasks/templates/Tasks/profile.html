@@ -21,13 +21,39 @@
             <p>Задач выполнено: <span class="profile__tasks">{{ tasks_count }}</span></p>
             <p>Отработанные часы: <span class="profile__hours">{{ hours_count }}</span></p>
         </div>
-        <form method="post" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button type="submit" class="logout-button">Выйти</button>
-        </form>
-
+        <div class="profile__buttons">
+            <a href="{% url 'edit_profile' %}" class="edit-button">Редактировать профиль</a>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="logout-button">Выйти</button>
+            </form>
+        </div>
     </div>
     {% post_form form button_text %}
 </div>
+
+{% if user_tasks %}
+<div class="profile-tasks">
+    <h2 class="profile-tasks__title">Мои задачи</h2>
+    <div class="tasks-list">
+        {% for task in user_tasks %}
+        <div class="task-card">
+            <h3 class="task-card__title">{{ task.category.name }}</h3>
+            <p class="task-card__time">Затрачено: {{ task.spent }} часов</p>
+            <p class="task-card__comment">{{ task.comment }}</p>
+            {% if task.report %}
+            <a href="{{ task.report.url }}" class="task-card__file" download>Скачать отчёт</a>
+            {% else %}
+            <a href="#" class="task-card__file no-click">Без отчёта</a>
+            {% endif %}
+            <div class="task-card__actions">
+                <a href="{% url 'edit_task' task_id=task.pk %}" class="task-card__btn task-card__btn--edit">Изменить</a>
+                <a href="{% url 'delete_task' task_id=task.pk %}" class="task-card__btn task-card__btn--delete">Удалить</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 {% endblock %}

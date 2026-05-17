@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="confirm-delete">
+    <h2 class="confirm-delete__title">Удалить задачу?</h2>
+    <div class="confirm-delete__info">
+        <p><strong>Категория:</strong> {{ object.category }}</p>
+        <p><strong>Затрачено:</strong> {{ object.spent }} ч.</p>
+        {% if object.comment %}
+        <p><strong>Комментарий:</strong> {{ object.comment }}</p>
+        {% endif %}
+        <p><strong>Сотрудник:</strong> {{ object.worker.first_name }} {{ object.worker.last_name }}</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="logout-button">Удалить</button>
+        <a href="javascript:history.back()" class="back-link">Отмена</a>
+    </form>
+</div>
+{% endblock %}

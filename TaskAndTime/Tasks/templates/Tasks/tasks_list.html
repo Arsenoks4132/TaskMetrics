@@ -11,10 +11,14 @@
         <p class="task-card__time">Затрачено: {{ task.spent }} часов</p>
         <p class="task-card__comment">{{ task.comment }}</p>
         {% if task.report %}
-        <a href="{{ task.report.url }}" class="task-card__file" download>📄 Скачать отчёт</a>
+        <a href="{{ task.report.url }}" class="task-card__file" download>Скачать отчёт</a>
         {% else %}
         <a href="#" class="task-card__file no-click">Без отчёта</a>
         {% endif %}
+        <div class="task-card__actions">
+            <a href="{% url 'edit_task' task_id=task.pk %}" class="task-card__btn task-card__btn--edit">Изменить</a>
+            <a href="{% url 'delete_task' task_id=task.pk %}" class="task-card__btn task-card__btn--delete">Удалить</a>
+        </div>
     </div>
     {% endfor %}
 </div>

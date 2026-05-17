@@ -1,12 +1,13 @@
 from django.db.models import Sum, F, Count
-from django.shortcuts import get_list_or_404
-from django.views.generic import TemplateView, CreateView, DetailView, ListView
+from django.shortcuts import get_list_or_404, get_object_or_404
+from django.views.generic import TemplateView, CreateView, DetailView, ListView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 
-from .forms import LoginUserForm, RegisterUserForm, AddTaskForm
+from .forms import LoginUserForm, RegisterUserForm, AddTaskForm, EditTaskForm
 from .models import Task
 from TaskAndTime import settings
 
@@ -81,14 +82,15 @@ class ProfileUser(LoginRequiredMixin, CreateView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        tasks = Task.objects.filter(worker=self.request.user)
+        tasks = Task.objects.filter(worker=self.request.user).order_by('-time_create')
         hours = 0
         if tasks:
             hours = tasks.aggregate(total=Sum('spent'))['total']
         context = {
             **context,
             'tasks_count': tasks.count(),
-            'hours_count': hours
+            'hours_count': hours,
+            'user_tasks': tasks,
         }
         return context
 
@@ -149,3 +151,61 @@ class TasksList(PermissionRequiredMixin, ListView):
             worker__pk=self.kwargs[self.pk_user_kwarg]
         )
         return tasks
+
+
+class EditTask(LoginRequiredMixin, UpdateView):
+    model = Task
+    form_class = EditTaskForm
+    template_name = 'Tasks/edit_task.html'
+    pk_url_kwarg = 'task_id'
+
+    def get_object(self, queryset=None):
+        task = get_object_or_404(Task, pk=self.kwargs[self.pk_url_kwarg])
+        # Сотрудник может редактировать только свои задачи
+        # Руководитель (is_staff) может редактировать задачи любого
+        if not self.request.user.is_staff and task.worker != self.request.user:
+            raise PermissionDenied
+        return task
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task = self.get_object()
+        context['title'] = 'Редактирование задачи'
+        context['button_text'] = 'Сохранить'
+        # Определяем, куда возвращаться после редактирования
+        if self.request.user.is_staff:
+            context['back_url'] = reverse_lazy('tasks_list', kwargs={'employee_id': task.worker.pk})
+        else:
+            context['back_url'] = reverse_lazy('profile')
+        return context
+
+    def get_success_url(self):
+        task = self.get_object()
+        if self.request.user.is_staff:
+            return reverse_lazy('tasks_list', kwargs={'employee_id': task.worker.pk})
+        return reverse_lazy('profile')
+
+
+class DeleteTask(LoginRequiredMixin, DeleteView):
+    model = Task
+    template_name = 'Tasks/delete_task.html'
+    pk_url_kwarg = 'task_id'
+
+    def get_object(self, queryset=None):
+        task = get_object_or_404(Task, pk=self.kwargs[self.pk_url_kwarg])
+        # Сотрудник может удалять только свои задачи
+        # Руководитель (is_staff) может удалять задачи любого
+        if not self.request.user.is_staff and task.worker != self.request.user:
+            raise PermissionDenied
+        return task
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Удаление задачи'
+        return context
+
+    def get_success_url(self):
+        task = self.get_object()
+        if self.request.user.is_staff:
+            return reverse_lazy('tasks_list', kwargs={'employee_id': task.worker.pk})
+        return reverse_lazy('profile')

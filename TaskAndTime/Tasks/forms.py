@@ -79,3 +79,26 @@ class AddTaskForm(forms.ModelForm):
             'comment': 'Комментарий (опционально)',
             'report': 'Отчёт (опционально)'
         }
+
+
+class EditTaskForm(forms.ModelForm):
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        empty_label='Тип задачи не выбран',
+        label='Тип задачи',
+        widget=forms.Select(attrs={'class': 'form__select'})
+    )
+
+    class Meta:
+        model = Task
+        fields = ['category', 'spent', 'comment', 'report']
+        widgets = {
+            'spent': forms.NumberInput(attrs={'class': 'form__input', 'min': 1, 'max': 24}),
+            'comment': forms.Textarea(attrs={'class': 'form__input'}),
+            'report': forms.FileInput(attrs={'class': 'form__file'}),
+        }
+        labels = {
+            'spent': 'Затраченное время',
+            'comment': 'Комментарий (опционально)',
+            'report': 'Отчёт (опционально)'
+        }

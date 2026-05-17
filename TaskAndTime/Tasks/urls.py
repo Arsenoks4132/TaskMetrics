@@ -13,5 +13,7 @@ urlpatterns = [
     path('profile', cache_page(10)(views.ProfileUser.as_view()), name='profile'),
     path('logout', LogoutView.as_view(), name='logout'),
     path('statistics', cache_page(30)(views.Statistics.as_view()), name='statistics'),
-    path('tasks/<int:employee_id>', cache_page(20)(views.TasksList.as_view()), name='tasks_list')
+    path('tasks/<int:employee_id>', cache_page(20)(views.TasksList.as_view()), name='tasks_list'),
+    path('tasks/edit/<int:task_id>', views.EditTask.as_view(), name='edit_task'),
+    path('tasks/delete/<int:task_id>', views.DeleteTask.as_view(), name='delete_task'),
 ]

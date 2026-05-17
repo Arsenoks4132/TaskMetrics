@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load Tasks_tags %}
+
+{% block content %}
+<div class="form-page">
+    <h2 class="form__title">Редактирование задачи</h2>
+    <p class="form__subtitle">Категория: <strong>{{ object.category }}</strong> &mdash; {{ object.spent }} ч.</p>
+    {% post_form form button_text %}
+    <a href="{{ back_url }}" class="back-link">&#8592; Назад</a>
+</div>
+{% endblock %}
