@@ -121,6 +121,20 @@ class ChangePasswordForm(PasswordChangeForm):
     )
 
 
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name', 'cost']
+        labels = {
+            'name': 'Название категории',
+            'cost': 'Стоимость часа (руб.)',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form__input'}),
+            'cost': forms.NumberInput(attrs={'class': 'form__input', 'min': 0}),
+        }
+
+
 class EditTaskForm(forms.ModelForm):
     category = forms.ModelChoiceField(
         queryset=Category.objects.all(),

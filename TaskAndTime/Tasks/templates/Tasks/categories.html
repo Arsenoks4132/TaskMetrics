@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main-header">
+    <h1 class="main-header__title">Категории задач</h1>
+    <p class="main-header__description">Управление категориями рабочих задач и их стоимостью.</p>
+</div>
+<div class="categories-actions">
+    <a href="{% url 'create_category' %}" class="edit-button">+ Добавить категорию</a>
+    <a href="{% url 'statistics' %}" class="back-link">&#8592; К списку сотрудников</a>
+</div>
+<div class="categories-list">
+    {% for category in categories %}
+    <div class="category-card">
+        <div class="category-card__info">
+            <h3 class="category-card__name">{{ category.name }}</h3>
+            <p class="category-card__cost">{{ category.cost }} руб./ч</p>
+        </div>
+        <div class="category-card__actions">
+            <a href="{% url 'edit_category' category_id=category.pk %}" class="task-card__btn task-card__btn--edit">Изменить</a>
+            <a href="{% url 'delete_category' category_id=category.pk %}" class="task-card__btn task-card__btn--delete">Удалить</a>
+        </div>
+    </div>
+    {% empty %}
+    <p class="categories-empty">Категории ещё не созданы.</p>
+    {% endfor %}
+</div>
+{% endblock %}

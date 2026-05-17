@@ -7,8 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 
-from .forms import LoginUserForm, RegisterUserForm, AddTaskForm, EditTaskForm, EditProfileForm, ChangePasswordForm
-from .models import Task
+from .forms import LoginUserForm, RegisterUserForm, AddTaskForm, EditTaskForm, EditProfileForm, ChangePasswordForm, CategoryForm
+from .models import Task, Category
 from TaskAndTime import settings
 
 
@@ -151,6 +151,57 @@ class TasksList(PermissionRequiredMixin, ListView):
             worker__pk=self.kwargs[self.pk_user_kwarg]
         )
         return tasks
+
+
+class CategoryList(PermissionRequiredMixin, ListView):
+    model = Category
+    template_name = 'Tasks/categories.html'
+    context_object_name = 'categories'
+    permission_required = ('Tasks.view_user',)
+    extra_context = {'title': 'Категории задач'}
+
+    def get_queryset(self):
+        return Category.objects.all().order_by('name')
+
+
+class CreateCategory(PermissionRequiredMixin, CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'Tasks/category_form.html'
+    permission_required = ('Tasks.view_user',)
+    extra_context = {
+        'title': 'Новая категория',
+        'button_text': 'Создать',
+    }
+
+    def get_success_url(self):
+        return reverse_lazy('categories')
+
+
+class EditCategory(PermissionRequiredMixin, UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'Tasks/category_form.html'
+    pk_url_kwarg = 'category_id'
+    permission_required = ('Tasks.view_user',)
+    extra_context = {
+        'title': 'Редактирование категории',
+        'button_text': 'Сохранить',
+    }
+
+    def get_success_url(self):
+        return reverse_lazy('categories')
+
+
+class DeleteCategory(PermissionRequiredMixin, DeleteView):
+    model = Category
+    template_name = 'Tasks/delete_category.html'
+    pk_url_kwarg = 'category_id'
+    permission_required = ('Tasks.view_user',)
+    extra_context = {'title': 'Удаление категории'}
+
+    def get_success_url(self):
+        return reverse_lazy('categories')
 
 
 class EditProfile(LoginRequiredMixin, UpdateView):

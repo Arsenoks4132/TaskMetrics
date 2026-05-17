@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="confirm-delete">
+    <h2 class="confirm-delete__title">Удалить категорию?</h2>
+    <div class="confirm-delete__info">
+        <p><strong>Название:</strong> {{ object.name }}</p>
+        <p><strong>Стоимость:</strong> {{ object.cost }} руб./ч</p>
+        <p class="confirm-delete__warning">Все задачи этой категории потеряют привязку к ней.</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="logout-button">Удалить</button>
+        <a href="{% url 'categories' %}" class="back-link">Отмена</a>
+    </form>
+</div>
+{% endblock %}

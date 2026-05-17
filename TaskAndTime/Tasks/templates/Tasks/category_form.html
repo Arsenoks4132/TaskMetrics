@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load Tasks_tags %}
+
+{% block content %}
+<div class="form-page">
+    <h2 class="form__title">{{ title }}</h2>
+    {% post_form form button_text %}
+    <a href="{% url 'categories' %}" class="back-link">&#8592; К списку категорий</a>
+</div>
+{% endblock %}

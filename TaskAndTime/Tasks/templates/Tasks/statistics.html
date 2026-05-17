@@ -6,6 +6,13 @@
     <h1 class="main-header__title">Список сотрудников</h1>
     <p class="main-header__description">Просмотрите подробную информацию о задачах, часах и заработке ваших
         сотрудников.</p>
+    <div class="main-header__actions">
+        <a href="{% url 'categories' %}" class="edit-button">Управление категориями</a>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Выйти</button>
+        </form>
+    </div>
 </div>
 <div class="employees-list">
     {% for employee in employees %}
