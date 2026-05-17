@@ -23,6 +23,31 @@ from .forms import AddTaskForm, RegisterUserForm, CategoryForm, EditProfileForm
 
 User = get_user_model()
 
+# ---------------------------------------------------------------------------
+# Стратегии генерации данных
+# ---------------------------------------------------------------------------
+
+# Текст без NUL-байтов (\x00) и других управляющих символов,
+# которые PostgreSQL и Django не принимают в строковых полях.
+# Текст без NUL-байтов (\x00), суррогатных символов и управляющих символов,
+# которые Django strip-ает до пустой строки (\r, \n в начале/конце и т.д.
+# не вызывают проблем сами по себе, но \r как единственный символ становится '').
+# Для надёжности исключаем все управляющие символы (категория Cc).
+safe_text = st.text(
+    alphabet=st.characters(
+        blacklist_categories=('Cs', 'Cc'),
+        blacklist_characters='\x00',
+    ),
+)
+
+# Простые email-адреса вида user@example.com (только буквы, цифры, точка, дефис).
+# st.emails() генерирует RFC-валидные адреса со спецсимволами (*@A.COM),
+# которые Django отклоняет своим EmailValidator — поэтому используем from_regex.
+simple_email = st.from_regex(
+    r'[a-z][a-z0-9]{2,8}@[a-z]{2,6}\.[a-z]{2,4}',
+    fullmatch=True,
+)
+
 
 # ---------------------------------------------------------------------------
 # Вспомогательные фабрики
@@ -89,14 +114,15 @@ class TaskModelValidationTest(HypothesisTestCase):
 # ---------------------------------------------------------------------------
 
 class AddTaskFormFuzzTest(HypothesisTestCase):
-    """Фаззинг формы добавления задачи на произвольные строки в comment."""
+    """Фаззинг формы добавления задачи."""
 
     def setUp(self):
         self.category = make_category('Form фаззинг', cost=300)
 
-    @given(comment=st.text(max_size=1000))
+    @given(comment=safe_text.filter(lambda s: len(s) <= 1000))
     def test_form_accepts_any_valid_comment(self, comment):
-        """Форма должна быть валидна при любом comment длиной до 1000 символов."""
+        """Форма должна быть валидна при любом comment до 1000 символов
+        (без управляющих символов, которые отклоняет PostgreSQL)."""
         data = {
             'category': self.category.pk,
             'spent': 4,
@@ -117,7 +143,7 @@ class AddTaskFormFuzzTest(HypothesisTestCase):
         self.assertFalse(form.is_valid())
         self.assertIn('spent', form.errors)
 
-    @given(comment=st.text(min_size=1001, max_size=5000))
+    @given(comment=safe_text.filter(lambda s: len(s) > 1000))
     def test_form_rejects_too_long_comment(self, comment):
         """Форма должна отклонять комментарии длиннее 1000 символов."""
         data = {
@@ -137,10 +163,10 @@ class AddTaskFormFuzzTest(HypothesisTestCase):
 class CategoryFormFuzzTest(HypothesisTestCase):
     """Фаззинг формы создания категории."""
 
-    @given(name=st.text(min_size=1, max_size=100))
+    @given(name=safe_text.filter(lambda s: 1 <= len(s) <= 100))
     def test_valid_category_name(self, name):
-        """Любое непустое название длиной до 100 символов должно проходить."""
-        # Убираем уже существующие названия, чтобы не нарушать unique constraint
+        """Любое безопасное непустое название до 100 символов должно проходить."""
+        # Пропускаем уже существующие названия, чтобы не нарушать unique constraint.
         assume(not Category.objects.filter(name=name).exists())
         data = {'name': name, 'cost': 100}
         form = CategoryForm(data=data)
@@ -155,7 +181,7 @@ class CategoryFormFuzzTest(HypothesisTestCase):
         form = CategoryForm(data=data)
         self.assertTrue(form.is_valid(), msg=f'Форма невалидна для cost={cost}: {form.errors}')
 
-    @given(name=st.text(min_size=101, max_size=500))
+    @given(name=safe_text.filter(lambda s: len(s) > 100))
     def test_category_name_too_long(self, name):
         """Название категории длиннее 100 символов должно отклоняться."""
         data = {'name': name, 'cost': 500}
@@ -171,20 +197,21 @@ class CategoryFormFuzzTest(HypothesisTestCase):
 class RegisterFormEmailFuzzTest(HypothesisTestCase):
     """Фаззинг поля email в форме регистрации."""
 
-    @given(email=st.emails())
+    @given(email=simple_email)
     def test_unique_email_accepted(self, email):
-        """Уникальный корректный email должен проходить валидацию."""
+        """Уникальный корректный email должен проходить валидацию формы регистрации."""
         assume(not User.objects.filter(email=email).exists())
+        # Генерируем username из email, ограничиваем длину до 20 символов.
+        username = f'u_{email.split("@")[0]}'[:20]
+        assume(not User.objects.filter(username=username).exists())
         data = {
-            'username': f'user_{email.replace("@", "_").replace(".", "_")[:20]}',
+            'username': username,
             'email': email,
             'first_name': 'Test',
             'last_name': 'User',
             'password1': 'StrongPass999!',
             'password2': 'StrongPass999!',
         }
-        # Тоже надо проверить уникальность username
-        assume(not User.objects.filter(username=data['username']).exists())
         form = RegisterUserForm(data=data)
         self.assertTrue(form.is_valid(), msg=f'Форма невалидна для email={email}: {form.errors}')
 
