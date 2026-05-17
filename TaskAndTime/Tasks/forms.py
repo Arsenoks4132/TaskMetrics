@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
 from django.core.exceptions import ValidationError
 
 from .models import Task, Category
@@ -79,6 +79,46 @@ class AddTaskForm(forms.ModelForm):
             'comment': 'Комментарий (опционально)',
             'report': 'Отчёт (опционально)'
         }
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['first_name', 'last_name', 'email', 'photo']
+        labels = {
+            'first_name': 'Имя',
+            'last_name': 'Фамилия',
+            'email': 'E-mail',
+            'photo': 'Фотография',
+        }
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form__input'}),
+            'last_name': forms.TextInput(attrs={'class': 'form__input'}),
+            'email': forms.EmailInput(attrs={'class': 'form__input'}),
+            'photo': forms.FileInput(attrs={'class': 'form__file'}),
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        user = self.instance
+        if get_user_model().objects.filter(email=email).exclude(pk=user.pk).exists():
+            raise ValidationError('Уже существует пользователь с таким E-mail')
+        return email
+
+
+class ChangePasswordForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label='Текущий пароль',
+        widget=forms.PasswordInput(attrs={'class': 'form__input'})
+    )
+    new_password1 = forms.CharField(
+        label='Новый пароль',
+        widget=forms.PasswordInput(attrs={'class': 'form__input'})
+    )
+    new_password2 = forms.CharField(
+        label='Повтор нового пароля',
+        widget=forms.PasswordInput(attrs={'class': 'form__input'})
+    )
 
 
 class EditTaskForm(forms.ModelForm):

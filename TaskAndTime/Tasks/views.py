@@ -1,13 +1,13 @@
 from django.db.models import Sum, F, Count
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic import TemplateView, CreateView, DetailView, ListView, UpdateView, DeleteView
-from django.contrib.auth.views import LoginView
-from django.contrib.auth import get_user_model
+from django.contrib.auth.views import LoginView, PasswordChangeView
+from django.contrib.auth import get_user_model, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 
-from .forms import LoginUserForm, RegisterUserForm, AddTaskForm, EditTaskForm
+from .forms import LoginUserForm, RegisterUserForm, AddTaskForm, EditTaskForm, EditProfileForm, ChangePasswordForm
 from .models import Task
 from TaskAndTime import settings
 
@@ -151,6 +151,34 @@ class TasksList(PermissionRequiredMixin, ListView):
             worker__pk=self.kwargs[self.pk_user_kwarg]
         )
         return tasks
+
+
+class EditProfile(LoginRequiredMixin, UpdateView):
+    model = get_user_model()
+    form_class = EditProfileForm
+    template_name = 'Tasks/edit_profile.html'
+    extra_context = {
+        'title': 'Редактирование профиля',
+        'button_text': 'Сохранить',
+    }
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return reverse_lazy('profile')
+
+
+class ChangePassword(LoginRequiredMixin, PasswordChangeView):
+    form_class = ChangePasswordForm
+    template_name = 'Tasks/change_password.html'
+    extra_context = {
+        'title': 'Смена пароля',
+        'button_text': 'Сменить пароль',
+    }
+
+    def get_success_url(self):
+        return reverse_lazy('profile')
 
 
 class EditTask(LoginRequiredMixin, UpdateView):
