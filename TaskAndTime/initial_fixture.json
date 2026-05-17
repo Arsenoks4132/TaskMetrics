@@ -1,632 +1,706 @@
 [
-  {
-    "model": "auth.permission",
-    "pk": 1,
-    "fields": {
-      "name": "Can add log entry",
-      "content_type": 1,
-      "codename": "add_logentry"
+    {
+        "model": "auth.permission",
+        "pk": 1,
+        "fields": {
+            "name": "Can add log entry",
+            "content_type": 1,
+            "codename": "add_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 2,
+        "fields": {
+            "name": "Can change log entry",
+            "content_type": 1,
+            "codename": "change_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 3,
+        "fields": {
+            "name": "Can delete log entry",
+            "content_type": 1,
+            "codename": "delete_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 4,
+        "fields": {
+            "name": "Can view log entry",
+            "content_type": 1,
+            "codename": "view_logentry"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 5,
+        "fields": {
+            "name": "Can add permission",
+            "content_type": 2,
+            "codename": "add_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 6,
+        "fields": {
+            "name": "Can change permission",
+            "content_type": 2,
+            "codename": "change_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 7,
+        "fields": {
+            "name": "Can delete permission",
+            "content_type": 2,
+            "codename": "delete_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 8,
+        "fields": {
+            "name": "Can view permission",
+            "content_type": 2,
+            "codename": "view_permission"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 9,
+        "fields": {
+            "name": "Can add group",
+            "content_type": 3,
+            "codename": "add_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 10,
+        "fields": {
+            "name": "Can change group",
+            "content_type": 3,
+            "codename": "change_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 11,
+        "fields": {
+            "name": "Can delete group",
+            "content_type": 3,
+            "codename": "delete_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 12,
+        "fields": {
+            "name": "Can view group",
+            "content_type": 3,
+            "codename": "view_group"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 13,
+        "fields": {
+            "name": "Can add content type",
+            "content_type": 4,
+            "codename": "add_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 14,
+        "fields": {
+            "name": "Can change content type",
+            "content_type": 4,
+            "codename": "change_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 15,
+        "fields": {
+            "name": "Can delete content type",
+            "content_type": 4,
+            "codename": "delete_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 16,
+        "fields": {
+            "name": "Can view content type",
+            "content_type": 4,
+            "codename": "view_contenttype"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 17,
+        "fields": {
+            "name": "Can add session",
+            "content_type": 5,
+            "codename": "add_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 18,
+        "fields": {
+            "name": "Can change session",
+            "content_type": 5,
+            "codename": "change_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 19,
+        "fields": {
+            "name": "Can delete session",
+            "content_type": 5,
+            "codename": "delete_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 20,
+        "fields": {
+            "name": "Can view session",
+            "content_type": 5,
+            "codename": "view_session"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 21,
+        "fields": {
+            "name": "Can add user",
+            "content_type": 6,
+            "codename": "add_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 22,
+        "fields": {
+            "name": "Can change user",
+            "content_type": 6,
+            "codename": "change_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 23,
+        "fields": {
+            "name": "Can delete user",
+            "content_type": 6,
+            "codename": "delete_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 24,
+        "fields": {
+            "name": "Can view user",
+            "content_type": 6,
+            "codename": "view_user"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 25,
+        "fields": {
+            "name": "Can add category",
+            "content_type": 7,
+            "codename": "add_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 26,
+        "fields": {
+            "name": "Can change category",
+            "content_type": 7,
+            "codename": "change_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 27,
+        "fields": {
+            "name": "Can delete category",
+            "content_type": 7,
+            "codename": "delete_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 28,
+        "fields": {
+            "name": "Can view category",
+            "content_type": 7,
+            "codename": "view_category"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 29,
+        "fields": {
+            "name": "Can add task",
+            "content_type": 8,
+            "codename": "add_task"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 30,
+        "fields": {
+            "name": "Can change task",
+            "content_type": 8,
+            "codename": "change_task"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 31,
+        "fields": {
+            "name": "Can delete task",
+            "content_type": 8,
+            "codename": "delete_task"
+        }
+    },
+    {
+        "model": "auth.permission",
+        "pk": 32,
+        "fields": {
+            "name": "Can view task",
+            "content_type": 8,
+            "codename": "view_task"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 1,
+        "fields": {
+            "app_label": "admin",
+            "model": "logentry"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 2,
+        "fields": {
+            "app_label": "auth",
+            "model": "permission"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 3,
+        "fields": {
+            "app_label": "auth",
+            "model": "group"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 4,
+        "fields": {
+            "app_label": "contenttypes",
+            "model": "contenttype"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 5,
+        "fields": {
+            "app_label": "sessions",
+            "model": "session"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 6,
+        "fields": {
+            "app_label": "Tasks",
+            "model": "user"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 7,
+        "fields": {
+            "app_label": "Tasks",
+            "model": "category"
+        }
+    },
+    {
+        "model": "contenttypes.contenttype",
+        "pk": 8,
+        "fields": {
+            "app_label": "Tasks",
+            "model": "task"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "657o400xoq1jf9qk1q2du161pdbv4l0n",
+        "fields": {
+            "session_data": ".eJxVjEEOwiAQRe_C2pCBSgsu3XsGMsOAVA0kpV0Z7y5NutDte-__t_C4rdlvLS5-ZnERTpx-GWF4xrILfmC5VxlqWZeZ5J7IwzZ5qxxf16P9O8jYcl-DAXKWkCciUuNEKug0Rg2kB0c4YOCACbkHsbOzTQmScWCZjAKnxOcLFT85Bg:1wOaxg:Biu8rhuJu1xKC9f9rNGMAo2p368c11RQn50c6rl2VRk",
+            "expire_date": "2026-05-31T12:51:16.008Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "92segv9hwawbi8drv095xhhwhn1zm9og",
+        "fields": {
+            "session_data": ".eJxVjMsOwiAQRf-FtSETHgIu3fsNZIZBqRpISrtq_Hdp0oVuzzn3biLiupS49jzHicVFeHH6ZYTplesu-In10WRqdZknknsiD9vlrXF-X4_276BgL2ONwM4kpcCbQCnorLRFDkDmbPEO4MhZ4wwO6DUrBGcDI-k8QmDw4vMF1zk3kQ:1wOaxN:2rvBVZcHjXsWrddaVREwAjukjJEHx_ft1qWrG5xPOTA",
+            "expire_date": "2026-05-31T12:50:57.621Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "q7yvdkq9qcdlny3qniwgjt2mkrltxwph",
+        "fields": {
+            "session_data": ".eJxVjDEOwyAQBP9CHaGz4TBOmd5vQAccwUkEkrGrKH-PLblImi12ZvctHG1rdlvjxc1RXMUgLr-dp_DkcoD4oHKvMtSyLrOXhyJP2uRUI79up_t3kKnlfU2qN4gjAKquM-hJ6X4PjEzMGgcMWiUFNoLhqJjBUkhWJx4tJbIgPl_Lsjf8:1wOcQG:Mncj-imrRraIpNSfHUyqu7oRxoC7r5EBLxTKNCYbLag",
+            "expire_date": "2026-05-31T14:24:52.344Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "z8uq2dffevtc991kgrsfoan5zw2c8lk2",
+        "fields": {
+            "session_data": ".eJxVjDsOgzAQRO_iOrK84B8p03MGa9deB5LIljBUUe4ekCiScua9mbcIuK1T2BovYU7iKgDE5bckjE8uB0kPLPcqYy3rMpM8FHnSJsea-HU73b-DCdu0r7XuYjbRgeo7i2AiEVpWnEEDKTcMPpKFwSOBN4at7y1k9uy126Oy4vMF-VA3eg:1wObp0:Ba5c7MvF8CaGhm9So_7dKT9v6Qh-VO7jTfdS2Eeezpc",
+            "expire_date": "2026-05-31T13:46:22.992Z"
+        }
+    },
+    {
+        "model": "Tasks.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$5oVvhffyLdk5yRirfJJaTR$LamUfQaHdvLDbrh8u3YAnwsCfAyu470X/st0ZPeXEvQ=",
+            "last_login": "2026-05-17T12:22:51.149Z",
+            "is_superuser": true,
+            "username": "admin",
+            "first_name": "Арсений",
+            "last_name": "Данов",
+            "email": "admin@admin.admin",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2026-05-01T09:00:00Z",
+            "photo": "",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "Tasks.user",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
+            "last_login": "2026-05-12T08:40:00Z",
+            "is_superuser": false,
+            "username": "manager_demo",
+            "first_name": "Ирина",
+            "last_name": "Соколова",
+            "email": "manager@example.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2026-05-02T08:30:00Z",
+            "photo": "",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "Tasks.user",
+        "pk": 4,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
+            "last_login": "2026-05-12T18:10:00Z",
+            "is_superuser": false,
+            "username": "employee_ivan",
+            "first_name": "Иван",
+            "last_name": "Петров",
+            "email": "ivan.petrov@example.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2026-05-03T09:15:00Z",
+            "photo": "",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "Tasks.user",
+        "pk": 5,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
+            "last_login": "2026-05-11T16:25:00Z",
+            "is_superuser": false,
+            "username": "employee_maria",
+            "first_name": "Мария",
+            "last_name": "Орлова",
+            "email": "maria.orlova@example.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2026-05-03T09:45:00Z",
+            "photo": "",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "Tasks.user",
+        "pk": 6,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
+            "last_login": "2026-05-10T14:05:00Z",
+            "is_superuser": false,
+            "username": "employee_egor",
+            "first_name": "Егор",
+            "last_name": "Смирнов",
+            "email": "egor.smirnov@example.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2026-05-04T10:20:00Z",
+            "photo": "",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "Tasks.user",
+        "pk": 7,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$dbZ9dSkYEdj99POD2Y6WSm$ohgmYMwp1oxavI621cSmTwVTHMKGsTXxaS0QfFf0+PY=",
+            "last_login": "2026-05-17T14:24:52.342Z",
+            "is_superuser": false,
+            "username": "arseniy",
+            "first_name": "Арсений",
+            "last_name": "Данов",
+            "email": "arseniy@yandex.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2026-05-17T12:30:04.194Z",
+            "photo": "users/2026/05/17/funny_owl.jpg",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "Tasks.user",
+        "pk": 8,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$mykg80Lh5ke7oZsxioI5SF$ito0xCdzjZrXOWoWqNXHnswfRCEJRCEhqVMTf+/1f4U=",
+            "last_login": "2026-05-17T12:50:57.620Z",
+            "is_superuser": false,
+            "username": "direct_emp",
+            "first_name": "Test",
+            "last_name": "User",
+            "email": "direct_emp@example.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2026-05-17T12:50:57.411Z",
+            "photo": "",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "Tasks.user",
+        "pk": 9,
+        "fields": {
+            "password": "pbkdf2_sha256$870000$QGHh0HKgNfyTpYFalGLrtn$JjuUbJCT83mg0A7r+6g7Ix2+/iOFx6JIdWRhg4qvY00=",
+            "last_login": "2026-05-17T12:51:16.008Z",
+            "is_superuser": false,
+            "username": "direct_emp2",
+            "first_name": "Test",
+            "last_name": "User",
+            "email": "direct_emp2@example.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2026-05-17T12:51:15.810Z",
+            "photo": "",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "Tasks.category",
+        "pk": 1,
+        "fields": {
+            "name": "Внештатные задания",
+            "cost": 120
+        }
+    },
+    {
+        "model": "Tasks.category",
+        "pk": 2,
+        "fields": {
+            "name": "Формирование отчётов",
+            "cost": 500
+        }
+    },
+    {
+        "model": "Tasks.category",
+        "pk": 3,
+        "fields": {
+            "name": "Разработка интерфейсов",
+            "cost": 800
+        }
+    },
+    {
+        "model": "Tasks.category",
+        "pk": 4,
+        "fields": {
+            "name": "Администрирование и документация",
+            "cost": 550
+        }
+    },
+    {
+        "model": "Tasks.category",
+        "pk": 5,
+        "fields": {
+            "name": "Менторство и проверка заданий",
+            "cost": 680
+        }
+    },
+    {
+        "model": "Tasks.category",
+        "pk": 6,
+        "fields": {
+            "name": "Аналитика и отчётность",
+            "cost": 900
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 1,
+        "fields": {
+            "worker": 4,
+            "category": 2,
+            "spent": 3,
+            "time_create": "2026-05-05T09:00:00Z",
+            "comment": "Подготовлен еженедельный отчет по задачам команды.",
+            "report": ""
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 2,
+        "fields": {
+            "worker": 4,
+            "category": 3,
+            "spent": 5,
+            "time_create": "2026-05-06T11:30:00Z",
+            "comment": "Выполнена доработка интерфейса формы авторизации.",
+            "report": ""
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 3,
+        "fields": {
+            "worker": 4,
+            "category": 6,
+            "spent": 2,
+            "time_create": "2026-05-07T15:10:00Z",
+            "comment": "Собрана аналитика по трудозатратам за неделю.",
+            "report": ""
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 4,
+        "fields": {
+            "worker": 5,
+            "category": 1,
+            "spent": 4,
+            "time_create": "2026-05-05T10:20:00Z",
+            "comment": "Выполнены внештатные задачи по обработке заявок.",
+            "report": ""
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 5,
+        "fields": {
+            "worker": 5,
+            "category": 4,
+            "spent": 3,
+            "time_create": "2026-05-08T13:40:00Z",
+            "comment": "Актуализирована рабочая документация по проекту.",
+            "report": ""
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 6,
+        "fields": {
+            "worker": 5,
+            "category": 5,
+            "spent": 2,
+            "time_create": "2026-05-09T16:00:00Z",
+            "comment": "Проверены и прокомментированы задания младших сотрудников.",
+            "report": ""
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 7,
+        "fields": {
+            "worker": 6,
+            "category": 3,
+            "spent": 6,
+            "time_create": "2026-05-06T09:50:00Z",
+            "comment": "Разработан пользовательский интерфейс страницы статистики.",
+            "report": "reports/2026/05/17/Отчет_6.pdf"
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 8,
+        "fields": {
+            "worker": 6,
+            "category": 2,
+            "spent": 2,
+            "time_create": "2026-05-07T12:15:00Z",
+            "comment": "Сформирован отчет по завершенным задачам спринта.",
+            "report": ""
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 9,
+        "fields": {
+            "worker": 6,
+            "category": 4,
+            "spent": 3,
+            "time_create": "2026-05-10T14:30:00Z",
+            "comment": "Подготовлена документация по настройке серверной части.",
+            "report": ""
+        }
+    },
+    {
+        "model": "Tasks.task",
+        "pk": 10,
+        "fields": {
+            "worker": 7,
+            "category": 3,
+            "spent": 1,
+            "time_create": "2026-05-17T14:25:10.658Z",
+            "comment": "Главная страница",
+            "report": ""
+        }
     }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 2,
-    "fields": {
-      "name": "Can change log entry",
-      "content_type": 1,
-      "codename": "change_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 3,
-    "fields": {
-      "name": "Can delete log entry",
-      "content_type": 1,
-      "codename": "delete_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 4,
-    "fields": {
-      "name": "Can view log entry",
-      "content_type": 1,
-      "codename": "view_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 5,
-    "fields": {
-      "name": "Can add permission",
-      "content_type": 2,
-      "codename": "add_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 6,
-    "fields": {
-      "name": "Can change permission",
-      "content_type": 2,
-      "codename": "change_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 7,
-    "fields": {
-      "name": "Can delete permission",
-      "content_type": 2,
-      "codename": "delete_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 8,
-    "fields": {
-      "name": "Can view permission",
-      "content_type": 2,
-      "codename": "view_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 9,
-    "fields": {
-      "name": "Can add group",
-      "content_type": 3,
-      "codename": "add_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 10,
-    "fields": {
-      "name": "Can change group",
-      "content_type": 3,
-      "codename": "change_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 11,
-    "fields": {
-      "name": "Can delete group",
-      "content_type": 3,
-      "codename": "delete_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 12,
-    "fields": {
-      "name": "Can view group",
-      "content_type": 3,
-      "codename": "view_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 13,
-    "fields": {
-      "name": "Can add content type",
-      "content_type": 4,
-      "codename": "add_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 14,
-    "fields": {
-      "name": "Can change content type",
-      "content_type": 4,
-      "codename": "change_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 15,
-    "fields": {
-      "name": "Can delete content type",
-      "content_type": 4,
-      "codename": "delete_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 16,
-    "fields": {
-      "name": "Can view content type",
-      "content_type": 4,
-      "codename": "view_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 17,
-    "fields": {
-      "name": "Can add session",
-      "content_type": 5,
-      "codename": "add_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 18,
-    "fields": {
-      "name": "Can change session",
-      "content_type": 5,
-      "codename": "change_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 19,
-    "fields": {
-      "name": "Can delete session",
-      "content_type": 5,
-      "codename": "delete_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 20,
-    "fields": {
-      "name": "Can view session",
-      "content_type": 5,
-      "codename": "view_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 21,
-    "fields": {
-      "name": "Can add user",
-      "content_type": 6,
-      "codename": "add_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 22,
-    "fields": {
-      "name": "Can change user",
-      "content_type": 6,
-      "codename": "change_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 23,
-    "fields": {
-      "name": "Can delete user",
-      "content_type": 6,
-      "codename": "delete_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 24,
-    "fields": {
-      "name": "Can view user",
-      "content_type": 6,
-      "codename": "view_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 25,
-    "fields": {
-      "name": "Can add category",
-      "content_type": 7,
-      "codename": "add_category"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 26,
-    "fields": {
-      "name": "Can change category",
-      "content_type": 7,
-      "codename": "change_category"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 27,
-    "fields": {
-      "name": "Can delete category",
-      "content_type": 7,
-      "codename": "delete_category"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 28,
-    "fields": {
-      "name": "Can view category",
-      "content_type": 7,
-      "codename": "view_category"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 29,
-    "fields": {
-      "name": "Can add task",
-      "content_type": 8,
-      "codename": "add_task"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 30,
-    "fields": {
-      "name": "Can change task",
-      "content_type": 8,
-      "codename": "change_task"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 31,
-    "fields": {
-      "name": "Can delete task",
-      "content_type": 8,
-      "codename": "delete_task"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 32,
-    "fields": {
-      "name": "Can view task",
-      "content_type": 8,
-      "codename": "view_task"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 1,
-    "fields": {
-      "app_label": "admin",
-      "model": "logentry"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 2,
-    "fields": {
-      "app_label": "auth",
-      "model": "permission"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 3,
-    "fields": {
-      "app_label": "auth",
-      "model": "group"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 4,
-    "fields": {
-      "app_label": "contenttypes",
-      "model": "contenttype"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 5,
-    "fields": {
-      "app_label": "sessions",
-      "model": "session"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 6,
-    "fields": {
-      "app_label": "Tasks",
-      "model": "user"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 7,
-    "fields": {
-      "app_label": "Tasks",
-      "model": "category"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 8,
-    "fields": {
-      "app_label": "Tasks",
-      "model": "task"
-    }
-  },
-  {
-    "model": "sessions.session",
-    "pk": "rk1n4lsj3el77iau3eukzw8i9ls6pfbg",
-    "fields": {
-      "session_data": ".eJxVjEEOwiAQRe_C2hBGYKAu3fcMBJhBqoYmpV0Z765NutDtf-_9lwhxW2vYOi9hInERTpx-txTzg9sO6B7bbZZ5busyJbkr8qBdjjPx83q4fwc19vqtB50INWSjwDhfrIrGe9IMiRGRwfmcbXHnIRKCVkln5YnRakCwJhXx_gDN5TdH:1wOadM:Zl0OKayFiD_Iio7zwuvj8vyESKx9mKiU1U5n32dv7_Q",
-      "expire_date": "2026-05-31T12:30:16.169Z"
-    }
-  },
-  {
-    "model": "Tasks.user",
-    "pk": 2,
-    "fields": {
-      "password": "pbkdf2_sha256$870000$5oVvhffyLdk5yRirfJJaTR$LamUfQaHdvLDbrh8u3YAnwsCfAyu470X/st0ZPeXEvQ=",
-      "last_login": "2026-05-17T12:22:51.149Z",
-      "is_superuser": true,
-      "username": "admin",
-      "first_name": "Арсений",
-      "last_name": "Данов",
-      "email": "admin@admin.admin",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2026-05-01T09:00:00Z",
-      "photo": "",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "Tasks.user",
-    "pk": 3,
-    "fields": {
-      "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
-      "last_login": "2026-05-12T08:40:00Z",
-      "is_superuser": false,
-      "username": "manager_demo",
-      "first_name": "Ирина",
-      "last_name": "Соколова",
-      "email": "manager@example.com",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2026-05-02T08:30:00Z",
-      "photo": "",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "Tasks.user",
-    "pk": 4,
-    "fields": {
-      "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
-      "last_login": "2026-05-12T18:10:00Z",
-      "is_superuser": false,
-      "username": "employee_ivan",
-      "first_name": "Иван",
-      "last_name": "Петров",
-      "email": "ivan.petrov@example.com",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2026-05-03T09:15:00Z",
-      "photo": "",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "Tasks.user",
-    "pk": 5,
-    "fields": {
-      "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
-      "last_login": "2026-05-11T16:25:00Z",
-      "is_superuser": false,
-      "username": "employee_maria",
-      "first_name": "Мария",
-      "last_name": "Орлова",
-      "email": "maria.orlova@example.com",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2026-05-03T09:45:00Z",
-      "photo": "",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "Tasks.user",
-    "pk": 6,
-    "fields": {
-      "password": "pbkdf2_sha256$870000$2Aw6PsUhy67bLLYxXvDu8c$Rwx2kOlXVKbLzYRo2k53d0Mu2S3KkzVYNvhwTqDv3rY=",
-      "last_login": "2026-05-10T14:05:00Z",
-      "is_superuser": false,
-      "username": "employee_egor",
-      "first_name": "Егор",
-      "last_name": "Смирнов",
-      "email": "egor.smirnov@example.com",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2026-05-04T10:20:00Z",
-      "photo": "",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "Tasks.user",
-    "pk": 7,
-    "fields": {
-      "password": "pbkdf2_sha256$870000$tCDaZLmztmLsVAORrOH2sX$nqQqLAshj3eqP5/uf9EQsuoRoQ+RFMfDzsbPWfcHtE4=",
-      "last_login": "2026-05-17T12:30:16.167Z",
-      "is_superuser": false,
-      "username": "arseniy",
-      "first_name": "Арсений",
-      "last_name": "Данов",
-      "email": "arseniy@yandex.com",
-      "is_staff": false,
-      "is_active": true,
-      "date_joined": "2026-05-17T12:30:04.194Z",
-      "photo": "users/2026/05/17/funny_owl.jpg",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "Tasks.category",
-    "pk": 1,
-    "fields": {
-      "name": "Внештатные задания",
-      "cost": 120
-    }
-  },
-  {
-    "model": "Tasks.category",
-    "pk": 2,
-    "fields": {
-      "name": "Формирование отчётов",
-      "cost": 500
-    }
-  },
-  {
-    "model": "Tasks.category",
-    "pk": 3,
-    "fields": {
-      "name": "Разработка интерфейсов",
-      "cost": 800
-    }
-  },
-  {
-    "model": "Tasks.category",
-    "pk": 4,
-    "fields": {
-      "name": "Администрирование и документация",
-      "cost": 550
-    }
-  },
-  {
-    "model": "Tasks.category",
-    "pk": 5,
-    "fields": {
-      "name": "Менторство и проверка заданий",
-      "cost": 680
-    }
-  },
-  {
-    "model": "Tasks.category",
-    "pk": 6,
-    "fields": {
-      "name": "Аналитика и отчётность",
-      "cost": 900
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 1,
-    "fields": {
-      "worker": 4,
-      "category": 2,
-      "spent": 3,
-      "time_create": "2026-05-05T09:00:00Z",
-      "comment": "Подготовлен еженедельный отчет по задачам команды.",
-      "report": ""
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 2,
-    "fields": {
-      "worker": 4,
-      "category": 3,
-      "spent": 5,
-      "time_create": "2026-05-06T11:30:00Z",
-      "comment": "Выполнена доработка интерфейса формы авторизации.",
-      "report": ""
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 3,
-    "fields": {
-      "worker": 4,
-      "category": 6,
-      "spent": 2,
-      "time_create": "2026-05-07T15:10:00Z",
-      "comment": "Собрана аналитика по трудозатратам за неделю.",
-      "report": ""
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 4,
-    "fields": {
-      "worker": 5,
-      "category": 1,
-      "spent": 4,
-      "time_create": "2026-05-05T10:20:00Z",
-      "comment": "Выполнены внештатные задачи по обработке заявок.",
-      "report": ""
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 5,
-    "fields": {
-      "worker": 5,
-      "category": 4,
-      "spent": 3,
-      "time_create": "2026-05-08T13:40:00Z",
-      "comment": "Актуализирована рабочая документация по проекту.",
-      "report": ""
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 6,
-    "fields": {
-      "worker": 5,
-      "category": 5,
-      "spent": 2,
-      "time_create": "2026-05-09T16:00:00Z",
-      "comment": "Проверены и прокомментированы задания младших сотрудников.",
-      "report": ""
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 7,
-    "fields": {
-      "worker": 6,
-      "category": 3,
-      "spent": 6,
-      "time_create": "2026-05-06T09:50:00Z",
-      "comment": "Разработан пользовательский интерфейс страницы статистики.",
-      "report": "reports/2026/05/17/Отчет_6.pdf"
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 8,
-    "fields": {
-      "worker": 6,
-      "category": 2,
-      "spent": 2,
-      "time_create": "2026-05-07T12:15:00Z",
-      "comment": "Сформирован отчет по завершенным задачам спринта.",
-      "report": ""
-    }
-  },
-  {
-    "model": "Tasks.task",
-    "pk": 9,
-    "fields": {
-      "worker": 6,
-      "category": 4,
-      "spent": 3,
-      "time_create": "2026-05-10T14:30:00Z",
-      "comment": "Подготовлена документация по настройке серверной части.",
-      "report": ""
-    }
-  }
 ]
