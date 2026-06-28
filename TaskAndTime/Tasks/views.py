@@ -22,10 +22,18 @@ class PageNotFound(TemplateView):
     template_name = 'Tasks/page404.html'
     extra_context = {'title': 'Страница не найдена'}
 
+    def render_to_response(self, context, **response_kwargs):
+        response_kwargs.setdefault('status', 404)
+        return super().render_to_response(context, **response_kwargs)
+
 
 class PageForbidden(TemplateView):
     template_name = 'Tasks/page403.html'
     extra_context = {'title': 'Доступ запрещен'}
+
+    def render_to_response(self, context, **response_kwargs):
+        response_kwargs.setdefault('status', 403)
+        return super().render_to_response(context, **response_kwargs)
 
 
 class LoginUser(LoginView):

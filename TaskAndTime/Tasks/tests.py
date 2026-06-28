@@ -12,6 +12,8 @@
 
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Permission
+from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 
 from hypothesis import given, assume
@@ -235,6 +237,9 @@ class RoleBasedAccessTest(TestCase):
         self.client = Client()
         self.employee = make_user('emp_test', 'StrongPass123!', is_staff=False)
         self.supervisor = make_user('sup_test', 'StrongPass123!', is_staff=True)
+        content_type = ContentType.objects.get_for_model(User)
+        view_user_perm = Permission.objects.get(codename='view_user', content_type=content_type)
+        self.supervisor.user_permissions.add(view_user_perm)
 
     def tearDown(self):
         self.client.logout()
@@ -306,6 +311,36 @@ class RoleBasedAccessTest(TestCase):
         obj = view.get_object()
         self.assertEqual(obj.pk, task.pk)
 
+    def test_anonymous_statistics_forbidden(self):
+        """Неаутентифицированный запрос к /statistics перенаправляется на страницу входа."""
+        response = self.client.get('/statistics')
+        self.assertIn(response.status_code, [301, 302])
+        self.assertIn('login', response['Location'])
+
+    def test_employee_cannot_access_statistics(self):
+        """Сотрудник без прав доступа получает 403 при обращении к /statistics."""
+        self.client.login(username='emp_test', password='StrongPass123!')
+        response = self.client.get('/statistics')
+        self.assertEqual(response.status_code, 403)
+
+    def test_supervisor_can_access_statistics(self):
+        """Руководитель с правом view_user получает HTTP 200 на /statistics."""
+        self.client.login(username='sup_test', password='StrongPass123!')
+        response = self.client.get('/statistics')
+        self.assertEqual(response.status_code, 200)
+
+    def test_employee_cannot_access_categories(self):
+        """Сотрудник без прав доступа получает 403 при обращении к /categories."""
+        self.client.login(username='emp_test', password='StrongPass123!')
+        response = self.client.get('/categories')
+        self.assertEqual(response.status_code, 403)
+
+    def test_supervisor_can_access_categories(self):
+        """Руководитель с правом view_user получает HTTP 200 на /categories."""
+        self.client.login(username='sup_test', password='StrongPass123!')
+        response = self.client.get('/categories')
+        self.assertEqual(response.status_code, 200)
+
     def test_supervisor_can_edit_any_task(self):
         """Руководитель (is_staff=True) может получить любую задачу для редактирования."""
         from Tasks.views import EditTask
@@ -330,3 +365,58 @@ class RoleBasedAccessTest(TestCase):
 
         obj = view.get_object()
         self.assertEqual(obj.pk, task.pk)
+
+
+# ---------------------------------------------------------------------------
+# Фаззинг HTTP-эндпоинтов: обработка случайных параметров URL
+# ---------------------------------------------------------------------------
+
+class HttpEndpointFuzzTest(HypothesisTestCase):
+    """Фаззинг HTTP-эндпоинтов приложения.
+
+    Проверяет, что эндпоинты корректно обрабатывают случайные (в том числе
+    несуществующие) идентификаторы в URL, не вызывая необработанных исключений
+    (ошибка 500).
+    """
+
+    def setUp(self):
+        self.client = Client()
+        self.supervisor = make_user('fuzz_http_sup', 'StrongPass123!', is_staff=True)
+        content_type = ContentType.objects.get_for_model(User)
+        view_user_perm = Permission.objects.get(codename='view_user', content_type=content_type)
+        self.supervisor.user_permissions.add(view_user_perm)
+
+    @given(task_id=st.integers(min_value=1, max_value=10_000))
+    def test_edit_task_fuzz_id_no_server_error(self, task_id):
+        """Несуществующий task_id не должен вызывать 500."""
+        self.client.login(username='fuzz_http_sup', password='StrongPass123!')
+        response = self.client.get(f'/tasks/edit/{task_id}')
+        self.assertNotEqual(response.status_code, 500)
+
+    @given(task_id=st.integers(min_value=1, max_value=10_000))
+    def test_delete_task_fuzz_id_no_server_error(self, task_id):
+        """Несуществующий task_id на странице удаления не вызывает 500."""
+        self.client.login(username='fuzz_http_sup', password='StrongPass123!')
+        response = self.client.get(f'/tasks/delete/{task_id}')
+        self.assertNotEqual(response.status_code, 500)
+
+    @given(employee_id=st.integers(min_value=1, max_value=10_000))
+    def test_tasks_list_fuzz_employee_no_server_error(self, employee_id):
+        """Несуществующий employee_id в списке задач не вызывает 500."""
+        self.client.login(username='fuzz_http_sup', password='StrongPass123!')
+        response = self.client.get(f'/tasks/{employee_id}')
+        self.assertNotEqual(response.status_code, 500)
+
+    @given(category_id=st.integers(min_value=1, max_value=10_000))
+    def test_edit_category_fuzz_id_no_server_error(self, category_id):
+        """Несуществующий category_id при редактировании не вызывает 500."""
+        self.client.login(username='fuzz_http_sup', password='StrongPass123!')
+        response = self.client.get(f'/categories/edit/{category_id}')
+        self.assertNotEqual(response.status_code, 500)
+
+    @given(category_id=st.integers(min_value=1, max_value=10_000))
+    def test_delete_category_fuzz_id_no_server_error(self, category_id):
+        """Несуществующий category_id при удалении не вызывает 500."""
+        self.client.login(username='fuzz_http_sup', password='StrongPass123!')
+        response = self.client.get(f'/categories/delete/{category_id}')
+        self.assertNotEqual(response.status_code, 500)
